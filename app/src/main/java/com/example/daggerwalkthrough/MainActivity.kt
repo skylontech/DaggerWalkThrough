@@ -6,6 +6,7 @@ import com.example.daggerwalkthrough.objects.SharedPreferenceProvider
 import com.example.daggerwalkthrough.storage.DataStore
 import com.example.daggerwalkthrough.utils.log
 import javax.inject.Inject
+import javax.inject.Named
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var sharedPreferenceProvider: SharedPreferenceProvider
 
     @Inject
+    @Named("prefs")
     lateinit var dataStore: DataStore
 
     private val sharedPreferences by lazy {

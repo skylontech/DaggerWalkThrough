@@ -7,16 +7,11 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class SharedPreferencesModule(private val application: Application) {
+class SharedPreferencesModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferenceProvider() : SharedPreferenceProvider {
+    fun provideSharedPreferenceProvider(application: Application) : SharedPreferenceProvider {
         return SharedPreferenceProvider(application)
-    }
-
-    @Provides
-    fun providersApplication() : Application {
-        return application
     }
 }

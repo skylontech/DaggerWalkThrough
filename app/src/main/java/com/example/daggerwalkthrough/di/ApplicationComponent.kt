@@ -1,4 +1,4 @@
-package com.example.daggerwalkthrough
+package com.example.daggerwalkthrough.di
 
 import dagger.Component
 

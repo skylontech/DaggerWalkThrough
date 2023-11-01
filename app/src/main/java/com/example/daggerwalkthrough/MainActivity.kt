@@ -3,6 +3,7 @@ package com.example.daggerwalkthrough
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.daggerwalkthrough.objects.SharedPreferenceProvider
+import com.example.daggerwalkthrough.storage.DataStore
 import com.example.daggerwalkthrough.utils.log
 import javax.inject.Inject
 
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPreferenceProvider: SharedPreferenceProvider
+
+    @Inject
+    lateinit var dataStore: DataStore
 
     private val sharedPreferences by lazy {
         sharedPreferenceProvider.preferences
@@ -33,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         "sharedPreferenceProvider in activity: $sharedPreferenceProvider".log()
+
+        "Got data source: $dataStore".log()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, LandingFragment(), "landing")

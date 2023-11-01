@@ -14,4 +14,9 @@ class SharedPreferencesModule(private val application: Application) {
     fun provideSharedPreferenceProvider() : SharedPreferenceProvider {
         return SharedPreferenceProvider(application)
     }
+
+    @Provides
+    fun providersApplication() : Application {
+        return application
+    }
 }

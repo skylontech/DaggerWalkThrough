@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val DATA_KEY = "data"
+        const val DATA_KEY = "data"
     }
 
     @Inject
@@ -31,5 +31,11 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.edit().putInt(DATA_KEY, 10).apply()
             "storedValue updated to 10".log()
         }
+
+        "sharedPreferenceProvider in activity: $sharedPreferenceProvider".log()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, LandingFragment(), "landing")
+            .commit()
     }
 }

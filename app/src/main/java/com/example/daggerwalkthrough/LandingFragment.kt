@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.daggerwalkthrough.storage.DataStore
 import com.example.daggerwalkthrough.viewModel.LoginViewModel
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import javax.inject.Named
 
-class LandingFragment : Fragment() {
+class LandingFragment : DaggerFragment() {
 
     interface Observer {
         fun onLogout()
@@ -32,7 +33,6 @@ class LandingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity().application as MainApplication).injector.inject(this)
 
         view.findViewById<Button>(R.id.btn_detail).setOnClickListener {
             startActivity(Intent(requireContext(), DetailActivity::class.java))

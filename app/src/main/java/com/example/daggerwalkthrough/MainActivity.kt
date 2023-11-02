@@ -5,10 +5,11 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.daggerwalkthrough.storage.DataStore
 import com.example.daggerwalkthrough.viewModel.LoginViewModel
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     @Named("prefs")
@@ -20,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        (application as MainApplication).injector.inject(this)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, LandingFragment(), "landing")

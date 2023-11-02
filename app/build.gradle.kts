@@ -51,4 +51,9 @@ dependencies {
     // dagger core
     implementation("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+
+    // Android Dagger
+    implementation("com.google.dagger:dagger-android:$daggerVersion")
+    implementation("com.google.dagger:dagger-android-support:$daggerVersion") // if you use the support libraries
+    kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
 }

@@ -1,17 +1,18 @@
 package com.example.daggerwalkthrough.di
 
 import android.app.Application
-import com.example.daggerwalkthrough.DetailActivity
-import com.example.daggerwalkthrough.DetailFragment
-import com.example.daggerwalkthrough.LandingFragment
-import com.example.daggerwalkthrough.LoginFragment
-import com.example.daggerwalkthrough.MainActivity
+import com.example.daggerwalkthrough.MainApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Component(
     modules = [
+        AndroidSupportInjectionModule::class,
+        ActivityModule::class,
+        FragmentModule::class,
         SharedPreferencesModule::class,
         DataStoreModule::class,
         ViewModelFactoryModule::class,
@@ -19,15 +20,7 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface ApplicationComponent {
-    fun inject(mainActivity: MainActivity)
-
-    fun inject(landingFragment: LandingFragment)
-
-    fun inject(detailActivity: DetailActivity)
-
-    fun inject(detailFragment: DetailFragment)
-    fun inject(loginFragment: LoginFragment)
+interface ApplicationComponent : AndroidInjector<MainApplication> {
 
     @Component.Factory
     interface Factory {

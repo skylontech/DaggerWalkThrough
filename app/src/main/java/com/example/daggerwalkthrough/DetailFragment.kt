@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import com.example.daggerwalkthrough.objects.DetailObject
 import com.example.daggerwalkthrough.objects.SharedPreferenceProvider
 import com.example.daggerwalkthrough.utils.log
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class DetailFragment : Fragment() {
+class DetailFragment : DaggerFragment() {
 
     @Inject
     lateinit var detailObject: DetailObject
@@ -25,7 +26,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity().application as MainApplication).injector.inject(this)
 
         "detailObject in DetailFragment: $detailObject".log()
     }

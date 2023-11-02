@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.daggerwalkthrough.objects.DetailObject
 import com.example.daggerwalkthrough.utils.log
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var detailObject: DetailObject
@@ -15,12 +16,10 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        (application as MainApplication).injector.inject(this)
+        "detailObject in DetailActivity: $detailObject".log()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, DetailFragment(), "detail")
             .commit()
-
-        "detailObject in DetailActivity: $detailObject".log()
     }
 }

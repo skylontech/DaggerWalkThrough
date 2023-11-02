@@ -8,9 +8,10 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.daggerwalkthrough.viewModel.LoginViewModel
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+class LoginFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -25,8 +26,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (requireActivity().application as MainApplication).injector.inject(this)
 
         view.findViewById<Button>(R.id.btn_login).setOnClickListener {
             ViewModelProvider(requireActivity(), viewModelFactory)[LoginViewModel::class.java].logIn()

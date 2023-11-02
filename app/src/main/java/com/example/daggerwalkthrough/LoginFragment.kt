@@ -6,21 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.daggerwalkthrough.storage.DataStore
+import androidx.lifecycle.ViewModelProvider
+import com.example.daggerwalkthrough.viewModel.LoginViewModel
 import javax.inject.Inject
-import javax.inject.Named
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        const val IS_LOGGED_IN = "isLoggedIn"
-        const val LOGGED_IN = 1
-        const val LOGGED_OFF = 0
-    }
-
     @Inject
-    @Named("prefs")
-    lateinit var dataStore: DataStore
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,8 +29,7 @@ class LoginFragment : Fragment() {
         (requireActivity().application as MainApplication).injector.inject(this)
 
         view.findViewById<Button>(R.id.btn_login).setOnClickListener {
-            dataStore.saveInt(IS_LOGGED_IN, LOGGED_IN)
-            parentFragmentManager.popBackStack()
+            ViewModelProvider(requireActivity(), viewModelFactory)[LoginViewModel::class.java].logIn()
         }
     }
 }

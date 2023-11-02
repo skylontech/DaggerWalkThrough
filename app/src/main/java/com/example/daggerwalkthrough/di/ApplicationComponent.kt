@@ -13,7 +13,9 @@ import javax.inject.Singleton
 @Component(
     modules = [
         SharedPreferencesModule::class,
-        DataStoreModule::class
+        DataStoreModule::class,
+        ViewModelFactoryModule::class,
+        ViewModelModule::class
     ]
 )
 @Singleton
@@ -29,6 +31,6 @@ interface ApplicationComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance application: Application) : ApplicationComponent
+        fun create(@BindsInstance application: Application): ApplicationComponent
     }
 }

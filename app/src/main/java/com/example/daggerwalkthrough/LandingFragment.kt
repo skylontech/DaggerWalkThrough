@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.daggerwalkthrough.storage.DataStore
+import com.example.daggerwalkthrough.viewModel.LoginViewModel
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -18,8 +20,7 @@ class LandingFragment : Fragment() {
     }
 
     @Inject
-    @Named("prefs")
-    lateinit var dataStore: DataStore
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,8 +39,7 @@ class LandingFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.btn_logOff).setOnClickListener {
-            dataStore.saveInt(LoginFragment.IS_LOGGED_IN, LoginFragment.LOGGED_OFF)
-            (requireActivity() as? Observer)?.onLogout()
+            ViewModelProvider(requireActivity(), viewModelFactory)[LoginViewModel::class.java].logOff()
         }
     }
 }

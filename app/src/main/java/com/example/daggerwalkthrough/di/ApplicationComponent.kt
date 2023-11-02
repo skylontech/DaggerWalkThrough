@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.daggerwalkthrough.DetailActivity
 import com.example.daggerwalkthrough.DetailFragment
 import com.example.daggerwalkthrough.LandingFragment
+import com.example.daggerwalkthrough.LoginFragment
 import com.example.daggerwalkthrough.MainActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -24,6 +25,7 @@ interface ApplicationComponent {
     fun inject(detailActivity: DetailActivity)
 
     fun inject(detailFragment: DetailFragment)
+    fun inject(loginFragment: LoginFragment)
 
     @Component.Factory
     interface Factory {

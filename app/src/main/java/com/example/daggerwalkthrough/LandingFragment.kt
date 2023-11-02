@@ -7,18 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.daggerwalkthrough.objects.SharedPreferenceProvider
-import com.example.daggerwalkthrough.utils.log
+import com.example.daggerwalkthrough.storage.DataStore
 import javax.inject.Inject
+import javax.inject.Named
 
 class LandingFragment : Fragment() {
 
     @Inject
-    lateinit var sharedPreferenceProvider: SharedPreferenceProvider
-
-    private val sharedPreferences by lazy {
-        sharedPreferenceProvider.preferences
-    }
+    @Named("prefs")
+    lateinit var dataStore: DataStore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,14 +29,12 @@ class LandingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as MainApplication).injector.inject(this)
 
-        val data = sharedPreferences.getInt(MainActivity.DATA_KEY, -1)
-
-        "StoredData in LandingFragment: $data".log()
-
-        "sharedPreferenceProvider in LandingFragment: $sharedPreferenceProvider".log()
-
         view.findViewById<Button>(R.id.btn_detail).setOnClickListener {
             startActivity(Intent(requireContext(), DetailActivity::class.java))
+        }
+
+        view.findViewById<Button>(R.id.btn_logOff).setOnClickListener {
+            dataStore.saveInt(LoginFragment.IS_LOGGED_IN, LoginFragment.LOGGED_OFF)
         }
     }
 }

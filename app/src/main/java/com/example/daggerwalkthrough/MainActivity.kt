@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity(), LandingFragment.Observer {
     @Named("prefs")
     lateinit var dataStore: DataStore
 
+    @Inject
+    lateinit var setOfStings: Set<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity(), LandingFragment.Observer {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, LandingFragment(), "landing")
             .commit()
+
+        setOfStings.log()
     }
 
     override fun onLogout() {

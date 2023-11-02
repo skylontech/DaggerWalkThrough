@@ -8,7 +8,7 @@ import com.example.daggerwalkthrough.utils.log
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LandingFragment.Observer {
 
     @Inject
     @Named("prefs")
@@ -23,7 +23,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, LandingFragment(), "landing")
             .commit()
+    }
 
+    override fun onLogout() {
+        doLogin()
+    }
+
+    private fun doLogin() {
         if (dataStore.getInt(LoginFragment.IS_LOGGED_IN, LoginFragment.LOGGED_OFF) == LoginFragment.LOGGED_OFF) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, LoginFragment(), "login")

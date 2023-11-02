@@ -13,6 +13,10 @@ import javax.inject.Named
 
 class LandingFragment : Fragment() {
 
+    interface Observer {
+        fun onLogout()
+    }
+
     @Inject
     @Named("prefs")
     lateinit var dataStore: DataStore
@@ -35,6 +39,7 @@ class LandingFragment : Fragment() {
 
         view.findViewById<Button>(R.id.btn_logOff).setOnClickListener {
             dataStore.saveInt(LoginFragment.IS_LOGGED_IN, LoginFragment.LOGGED_OFF)
+            (requireActivity() as? Observer)?.onLogout()
         }
     }
 }

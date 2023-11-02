@@ -17,6 +17,9 @@ class MainActivity : AppCompatActivity(), LandingFragment.Observer {
     @Inject
     lateinit var setOfStings: Set<String>
 
+    @Inject
+    lateinit var mapOfStrings : Map<String, String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +31,8 @@ class MainActivity : AppCompatActivity(), LandingFragment.Observer {
             .commit()
 
         setOfStings.log()
+
+        mapOfStrings.log()
     }
 
     override fun onLogout() {
